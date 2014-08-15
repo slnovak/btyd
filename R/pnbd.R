@@ -112,6 +112,7 @@ pnbd.EstimateParameters <- function(cal.cbs, par.start = c(1, 1, 1, 1), max.para
     
     ## helper function to be optimized
     pnbd.eLL <- function(params, cal.cbs, max.param.value) {
+        if(min(params) < 0){ return(0) }
         params <- exp(params)
         params[params > max.param.value] <- max.param.value
         return(-1 * pnbd.cbs.LL(params, cal.cbs))
