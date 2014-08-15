@@ -115,7 +115,8 @@ pnbd.EstimateParameters <- function(cal.cbs, par.start = c(1, 1, 1, 1), max.para
         if(min(params) < 0){ return(0) }
         params <- exp(params)
         params[params > max.param.value] <- max.param.value
-        return(-1 * pnbd.cbs.LL(params, cal.cbs))
+        ll = tryCatch(-1 * pnbd.cbs.LL(params, cal.cbs), error = function(e) { Inf })
+        return(min(ll, 1e10))
     }
     logparams <- log(par.start)
     results <- optim(logparams, pnbd.eLL, cal.cbs = cal.cbs, max.param.value = max.param.value, 
