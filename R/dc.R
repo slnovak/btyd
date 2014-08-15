@@ -296,7 +296,7 @@ dc.MergeCustomers <- function(data.correct, data.to.correct) {
         colnames(data.correct.ordered) <- colnames(data.correct)
     }
     
-    data.to.correct <- data.to.correct[order(rownames(data.to.correct)), ]
+    data.to.correct <- data.to.correct[order(rownames(data.to.correct)), , drop=F]
     rownames(data.to.correct.new) <- rownames(data.correct.ordered)
     colnames(data.to.correct.new) <- colnames(data.to.correct)
     
